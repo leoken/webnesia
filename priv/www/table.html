@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script type="text/javascript" charset="utf-8" src="js/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/webnesia.js"></script>
+    <script id="table_caption_tmpl" type="text/x-jquery-tmpl">
+        <strong>webnesia</strong> &rarr; <a href="/_utils/">tables</a> &rarr; ${}
+    </script>
+    <script id="table_header_tmpl" type="text/x-jquery-tmpl">
+        <th>${}</th>
+    </script>
+    <script id="table_body_tmpl" type="text/x-jquery-tmpl">
+        <tr>
+            {{each(i, key) $item.data.keys}}
+            <td>${$item.data[key]}</td>
+            {{/each}}
+        </tr>
+    </script>
+    <script id="table_footer_tmpl" type="text/x-jquery-tmpl">
+        <td colspan="${number_of_attributes - 1}">
+            {{if total_rows}}
+            showing ${offset + 1} - ${number_of_rows + offset} of ${total_rows} records
+            {{else}}
+            this table currently is empty or unreadable
+            {{/if}}
+        </td>
+        <td class="table_footer_navigation">
+            {{if offset > 0}}
+                <a href="javascript:void(0);" onclick="render_table(${limit}, ${offset - limit})">&larr; previous page</a>
+            {{else}}
+                &larr; previous page
+            {{/if}}
+            &hellip;
+            {{if offset + number_of_rows < total_rows}}
+                <a href="javascript:void(0);" onclick="render_table(${number_of_rows}, ${offset + number_of_rows})">next page &rarr;</a>
+            {{else}}
+                next page &rarr;
+            {{/if}}
+        </td>
+    </script>
+    <script type="text/javascript" charset="utf-8">    
+        $(document).ready(function() {
+            render_table(5, 0);
+        });
+    </script>
+	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<title>webnesia</title>
+</head>
+<body>
+
+<table>
+    <caption id="table_caption"></caption>
+    <thead><tr id="table_header"></tr></thead>
+    <tbody id="table_body"></tbody>
+    <tfoot><tr id="table_footer"></tr></tfoot>
+</table>
+
+</body>
+</html>

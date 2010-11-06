@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script type="text/javascript" charset="utf-8" src="js/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/json2.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/webnesia.js"></script>
+    <script id="tables_tmpl" type="text/x-jquery-tmpl">
+        <tr>
+            <td><a href="table.html?${$item.data}">${$item.data}</a></td>
+        </tr>
+    </script>
+    <script type="text/javascript" charset="utf-8">    
+        $(document).ready(function() {
+            $.get('/_all_tables', function(data) {
+                $('#tables_tmpl').tmpl(data).appendTo('#table_body');
+            });
+            $("#create_test_table").click(function () { create_test_table(); });
+            $("#delete_test_table").click(function () { delete_test_table(); });
+        });
+    </script>
+	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<title>webnesia</title>
+</head>
+<body>
+
+<table class="listing">
+    <caption><strong>webnesia</strong> &rarr; <a href="/_utils/">tables</a></caption>
+    <thead><tr id="table_header"><th>name</th></tr></thead>
+    <tbody class="content" id="table_body"></tbody>
+</table>
+
+<p>
+    <button id="create_test_table" type="button">create test table</button>
+    <button id="delete_test_table" type="button">delete test table</button>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+body {
+	background: white;
+    font-family: arial, sans-serif;
+    font-size: 10pt;
+	margin: 0px 0px 0px 0px;
+	padding: 10px;
+}
+
+a {
+    color: #3A4856;
+    text-decoration: none;
+    border-bottom: 1px solid #C6C8CB;
+}
+a:visited {
+    color: #777
+}
+a:hover {
+    color: #000;
+}
+
+/*
+  Adapted from "Winter Blues" CSS theme for CSS Table Gallery (http://icant.co.uk/csstablegallery/)
+  by Gunta Klavina (http://www.klavina.com)
+*/
+table {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border-collapse: collapse;
+    color: #333;
+    background: #F3F5F7
+} 
+
+table caption {
+    text-align: left;
+    font-size: 16pt;
+    padding-bottom: 10px
+}
+
+table thead th {
+    background: #3A4856;
+    padding: 15px 10px;
+    color: #fff; text-align: left;
+    font-weight: normal;
+    border-left: 1px solid #e0e1e3
+}
+
+table tbody, table thead {
+    border-left: 1px solid #EAECEE;
+    border-right: 1px solid #EAECEE
+}
+
+table tbody {
+    border-bottom: 1px solid #EAECEE
+}
+                      
+table tbody td, table tbody th {
+    padding: 10px;
+    text-align: left
+}
+
+table tbody tr {
+    background: #F3F5F7;
+    border-bottom: 1px solid #e0e1e3
+}
+
+table tbody td {
+    border-left: 1px solid #e0e1e3
+}
+
+table tbody tr:nth-child(odd) {
+    background: #F0F2F4
+}
+
+table tbody tr:hover {
+    background: #EAECEE;
+    color: #111
+}
+
+table tfoot {
+    border-top: 3px solid #e0e1e3;
+}
+
+table tfoot td, table tfoot th, table tfoot tr {
+    padding-right: 25px;
+    padding: 10px;
+    text-align: left
+}
+
+table .table_footer_navigation {
+    text-align: right;
+    color: #999;
+    padding-right: 20px;
+}

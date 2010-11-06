@@ -1,0 +1,9 @@
+1- make sure you have mochiweb installed;
+
+2- check the symlink to mochiweb source on deps/;
+
+3- run make;
+
+4- run ./start-dev.sh;
+
+5- open your browser on http://localhost:8000/_utils/

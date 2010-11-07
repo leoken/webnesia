@@ -33,9 +33,18 @@
             {{else}}
                 &larr; previous page
             {{/if}}
-            &hellip;
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+            records per page
+            <select id="per_page" onchange="render_table($(this).val(), 0);">
+                <option value="5" {{if limit == 5}}selected{{/if}}>5</option>
+                <option value="10" {{if limit == 10}}selected{{/if}}>10</option>
+                <option value="25" {{if limit == 25}}selected{{/if}}>25</option>
+                <option value="50" {{if limit == 50}}selected{{/if}}>50</option>
+                <option value="100" {{if limit == 100}}selected{{/if}}>100</option>
+            </select>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
             {{if offset + number_of_rows < total_rows}}
-                <a href="javascript:void(0);" onclick="render_table(${number_of_rows}, ${offset + number_of_rows})">next page &rarr;</a>
+                <a href="javascript:void(0);" onclick="render_table(${limit}, ${offset + number_of_rows})">next page &rarr;</a>
             {{else}}
                 next page &rarr;
             {{/if}}

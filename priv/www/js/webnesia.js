@@ -1,5 +1,9 @@
+var activity = false;
+
 function render_table(limit, offset)
 {
+    activity = true;
+    show_activity();
     var table = window.location.href.slice(window.location.href.indexOf("?") + 1);
     $.get("/" + table, function(tableInfo) {
         $("#table_caption").html($("#table_caption_tmpl").tmpl(tableInfo.table_name));
@@ -12,6 +16,8 @@ function render_table(limit, offset)
                 data[key].keys = tableInfo.attributes;
             }
             $("#table_body").html($("#table_body_tmpl").tmpl(data));
+            activity = false;
+            hide_activity();
         });
     });
 }
@@ -31,4 +37,20 @@ function delete_test_table () {
     $.ajax({url: "/test", type: "DELETE", async: false, success: function (data) {
         location.reload();
     }});   
+}
+
+function show_activity () {
+    $("#activity_indicator").fadeIn(125, function () {
+        if (activity) {
+            hide_activity();
+        }
+    });
+}
+
+function hide_activity () {
+    $("#activity_indicator").fadeOut(125, function () {
+        if (activity) {
+            show_activity();
+        }
+    });
 }

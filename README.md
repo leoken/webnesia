@@ -2,6 +2,8 @@
 
 webnesia is a REST interface to Erlang's mnesia. It provides an API and a Web frontend with many similarities to [CouchDB](http://couchdb.org).
 
+![webnesia table UI](https://github.com/tarpipe/webnesia/raw/master/doc/images/webnesia_table_ui.png)
+
 ## Installation instructions
 
 1. make sure you have [mochiweb](https://github.com/mochi/mochiweb) installed;

@@ -34,11 +34,16 @@ loop(Req, DocRoot) ->
                 "favicon.ico" ->
                     Req:not_found();
                 Table ->
-                    case re:run(Table, "(.+?)/_all_records", [{capture, [1]}]) of
-                        {match, [{StartIndex, Count}]} ->
+                    case re:run(Table, "(.+?)/(.+)", [{capture, [1, 2]}]) of
+                        {match, Matches} ->
                             QueryString = Req:parse_qs(),
-                            TableName = string:substr(Table, StartIndex + 1, Count),
-                            Req:respond({200, [{"Content-type", "application/json"}], webnesia_db:list(TableName, list_to_integer(proplists:get_value("limit", QueryString, "0")), list_to_integer(proplists:get_value("skip", QueryString, "0")))});
+                            [TableName, What] = [ string:substr(Table, StartIndex + 1, Count) || {StartIndex, Count} <- Matches],
+                            case What of
+                                "_all_records" ->
+                                    Req:respond({200, [{"Content-type", "application/json"}], webnesia_db:list(TableName, list_to_integer(proplists:get_value("limit", QueryString, "0")), list_to_integer(proplists:get_value("skip", QueryString, "0")))});
+                                Id ->
+                                    Req:respond({200, [{"Content-type", "application/json"}], webnesia_db:read(TableName, Id)})
+                            end;     
                         _ ->
                             Req:respond({200, [{"Content-type", "application/json"}], webnesia_db:info(Table)})
                     end

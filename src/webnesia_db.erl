@@ -17,6 +17,7 @@
 -export ([list/2]).
 -export ([list/3]).
 -export ([save/2]).
+-export ([read/2]).
 
 %--------------------------------------------------------------------
 %% @doc
@@ -141,3 +142,12 @@ save (Table, JSONData) ->
         exit:Reason -> {'EXIT',Reason};
         error:Reason -> {'ERROR',{Reason,erlang:get_stacktrace()}}
     end.
+
+%--------------------------------------------------------------------
+%% @doc
+%%
+%% @end
+%%--------------------------------------------------------------------
+read (Table, Key) ->
+    {atomic, Records} = mnesia:transaction(fun() -> mnesia:read(list_to_atom(Table), mochijson2:decode(Key)) end),
+    webnesia_response:encode_records(Records, mnesia:table_info(list_to_atom(Table), size), mnesia:table_info(list_to_atom(Table), size), 0).

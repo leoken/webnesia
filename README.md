@@ -36,6 +36,8 @@ Right now, these are the supported methods:
 
 *   `GET /<table_name>`: read information about the table `table_name`.
 
+*   `GET /<table_name>/<record_id>`: get a specific record from the table `table_name`.
+
 *   `GET /<table_name>/_all_records`: read all records from table `table_name`.
 
     There two optional parameters:

@@ -14,6 +14,7 @@ function render_table(limit, offset)
             data = data.rows;
             for (key in data) {
                 data[key].keys = tableInfo.attributes;
+                data[key].table = table;
             }
             $("#table_body").html($("#table_body_tmpl").tmpl(data));
             activity = false;

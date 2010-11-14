@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<script type="text/javascript" charset="utf-8" src="js/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.tmpl.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/webnesia.js"></script>
+    <script id="table_caption_tmpl" type="text/x-jquery-tmpl">
+        <strong>webnesia</strong> &rarr; <a href="/_utils/">tables</a> &rarr; <a href="/_utils/table.html?${table}">${table}</a> &rarr; ${record} <span id="activity_indicator"><strong>&#10074;</strong></span>
+    </script>
+    <script id="table_body_tmpl" type="text/x-jquery-tmpl">
+        {{each(key, item) $item.data}}
+        <tr>
+        <th>${key}</th>
+        <td>${$item.data[key]}</td>
+        </tr>
+        {{/each}}
+    </script>
+    <script type="text/javascript" charset="utf-8">    
+        $(document).ready(function() {
+            render_record();
+        });
+    </script>
+	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+	<title>webnesia</title>
+</head>
+<body>
+
+<table>
+    <caption id="table_caption"></caption>
+    <tbody id="table_body"></tbody>
+</table>
+
+</body>
+</html>

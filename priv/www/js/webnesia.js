@@ -22,10 +22,27 @@ function render_table(limit, offset)
     });
 }
 
+function render_record()
+{
+    activity = true;
+    show_activity();
+    var table_record = window.location.href.slice(window.location.href.indexOf("?") + 1).split(/\//);
+    var table = table_record[0];
+    var record = table_record[1];
+    $.get("/" + table, function(tableInfo) {
+        $("#table_caption").html($("#table_caption_tmpl").tmpl({"table": tableInfo.table_name, "record": record}));
+        $.get("/" + table + "/" + record, function(data) {
+            $("#table_body").html($("#table_body_tmpl").tmpl(data.rows[0]));
+            activity = false;
+            hide_activity();
+        });
+    });
+}
+
 function create_test_table () {
     $.ajax({url: "/test", type: "PUT", async: false, data: JSON.stringify(["id", "timestamp", "test_field"]), success: function (data) {
         if (data == "ok") {
-            for (var i = 0; i < 100 ; i++) {
+            for (var i = 1; i <= 500 ; i++) {
                 $.ajax({url: "/test", type: "POST", async: false, data: JSON.stringify({"id": i, "test_field_1": new Date().getTime(), "test_field": "the brown fox jumps over the lazy dog"})});
             }
             location.reload();

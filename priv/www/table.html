@@ -15,7 +15,7 @@
     <script id="table_body_tmpl" type="text/x-jquery-tmpl">
         <tr>
             {{each(i, key) $item.data.keys}}
-            <td>${$item.data[key]}</td>
+            <td>{{if i == 0}}<a href="/_utils/record.html?${$item.data.table}/${$item.data[key]}">${$item.data[key]}</a>{{else}}${$item.data[key]}{{/if}}</td>
             {{/each}}
         </tr>
     </script>

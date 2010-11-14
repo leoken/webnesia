@@ -18,6 +18,7 @@
 -export ([list/3]).
 -export ([save/2]).
 -export ([read/2]).
+-export ([delete/2]).
 
 %--------------------------------------------------------------------
 %% @doc
@@ -151,3 +152,36 @@ save (Table, JSONData) ->
 read (Table, Key) ->
     {atomic, Records} = mnesia:transaction(fun() -> mnesia:read(list_to_atom(Table), mochijson2:decode(Key)) end),
     webnesia_response:encode_records(Records, mnesia:table_info(list_to_atom(Table), size), mnesia:table_info(list_to_atom(Table), size), 0).
+
+%--------------------------------------------------------------------
+%% @doc
+%%
+%% @end
+%%--------------------------------------------------------------------
+delete (Table, Key) ->
+    {atomic, Response} = mnesia:transaction(fun() -> mnesia:delete({list_to_atom(Table), mochijson2:decode(Key)}) end),
+    webnesia_response:encode(Response).
+
+%%
+%% Tests
+%%
+-include_lib("eunit/include/eunit.hrl").
+-ifdef(TEST).
+
+%--------------------------------------------------------------------
+%% @doc
+%%
+%% @end
+%%--------------------------------------------------------------------
+create_table_test () ->
+    ?assert(webnesia_db:create_table("test_table", "[\"test_key\",\"test_field\"]") =:= [34, "ok", 34]).
+
+%--------------------------------------------------------------------
+%% @doc
+%%
+%% @end
+%%--------------------------------------------------------------------
+delete_table_test () ->
+    ?assert(webnesia_db:delete_table("test_table") =:= [34, "ok", 34]).
+
+-endif.

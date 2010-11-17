@@ -34,13 +34,15 @@ Right now, these are the supported methods:
 
 *   `DELETE /<table_name>`: delete the table named `table_name`.
 
+*   `DELETE /<table_name>/<record_id>`: delete a specific record from the table `table_name`.
+
 *   `GET /<table_name>`: read information about the table `table_name`.
 
 *   `GET /<table_name>/<record_id>`: get a specific record from the table `table_name`.
 
 *   `GET /<table_name>/_all_records`: read all records from table `table_name`.
 
-    There two optional parameters:
+    There are two optional parameters:
     
     * `limit`: limit the query to a given number of records;
     * `skip`: skip a given number of records.

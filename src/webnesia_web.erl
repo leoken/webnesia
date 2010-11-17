@@ -59,7 +59,13 @@ loop(Req, DocRoot) ->
                     Req:respond({200, [{"Content-type", "application/json"}], webnesia_db:create_table(Table, Req:recv_body())})
             end;
         'DELETE' ->
-            Req:respond({200, [{"Content-type", "text/html"}], webnesia_db:delete_table(Path)});
+            case re:run(Path, "(.+?)/(.+)", [{capture, [1, 2]}]) of
+                {match, Matches} ->
+                    [Table, Record] = [ string:substr(Path, StartIndex + 1, Count) || {StartIndex, Count} <- Matches],
+                    Req:respond({200, [{"Content-type", "application/json"}], webnesia_db:delete(Table, Record)});
+                _ ->
+                    Req:respond({200, [{"Content-type", "application/json"}], webnesia_db:delete_table(Path)})
+            end;
         _ ->
             Req:respond({501, [], []})
     end.
